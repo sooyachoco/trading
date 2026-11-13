@@ -5,7 +5,7 @@ from collective_alpha.providers.kis import KISClient
 from collective_alpha.providers.krx import KRXClient
 from collective_alpha.providers.dart import DARTClient
 from collective_alpha.paper import PaperBroker
-from collective_alpha.status import provider_status
+from collective_alpha.status import provider_status as get_provider_status
 from collective_alpha.providers.mock import MockMarketData
 
 mcp = FastMCP("collective-alpha-korea")
@@ -18,7 +18,7 @@ paper = PaperBroker(settings.db_path)
 @mcp.tool()
 def provider_status() -> str:
     """Show whether KIS, KRX and DART are configured; never returns secret values."""
-    return json.dumps(provider_status(), ensure_ascii=False)
+    return json.dumps(get_provider_status(), ensure_ascii=False)
 
 @mcp.tool()
 def mock_skc_snapshot() -> str:
