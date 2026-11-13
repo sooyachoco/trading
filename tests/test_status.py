@@ -1,11 +1,13 @@
-from collective_alpha.status import provider_status
+from types import SimpleNamespace
+from collective_alpha import status
 from collective_alpha.providers.mock import MockMarketData
 
 def test_all_providers_report_unavailable_without_credentials(monkeypatch):
-    from collective_alpha import config
-    for key in ("kis_app_key", "kis_app_secret", "krx_base_url", "krx_endpoint", "krx_auth_key", "dart_api_key"):
-        monkeypatch.setattr(config.settings, key, "")
-    result = provider_status()
+    monkeypatch.setattr(status, "settings", SimpleNamespace(
+        kis_app_key="", kis_app_secret="", krx_base_url="", krx_endpoint="",
+        krx_auth_key="", dart_api_key=""
+    ))
+    result = status.provider_status()
     assert result["mode"] == "DEVELOPMENT"
     assert result["live_data_ready"] is False
     assert [p["status"] for p in result["providers"]] == ["UNAVAILABLE"] * 3
