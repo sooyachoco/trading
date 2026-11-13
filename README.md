@@ -34,3 +34,7 @@ collective-alpha-mcp
 ## Sprint 01 validation
 
 Unit tests mock provider HTTP responses and verify URL/parameters, symbol normalization, DART corporation-code lookup, KRX service configuration and paper-ledger accounting. Real provider connectivity still requires the user's keys and a selected KRX dataset.
+
+## API onboarding (KIS / KRX / OpenDART)
+
+See [Korean API onboarding guide](docs/API_ONBOARDING_KO.md). With no credentials configured, use the `provider_status` and `mock_skc_snapshot` MCP tools. The mock snapshot contains no market prices and is clearly labelled `MOCK`.

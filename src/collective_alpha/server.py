@@ -16,7 +16,7 @@ dart = DARTClient(settings.dart_api_key)
 paper = PaperBroker(settings.db_path)
 
 @mcp.tool()
-def provider_status_tool() -> str:
+def provider_status() -> str:
     """Show whether KIS, KRX and DART are configured; never returns secret values."""
     return json.dumps(provider_status(), ensure_ascii=False)
 
