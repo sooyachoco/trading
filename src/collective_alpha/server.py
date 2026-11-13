@@ -16,6 +16,16 @@ dart = DARTClient(settings.dart_api_key)
 paper = PaperBroker(settings.db_path)
 
 @mcp.tool()
+def provider_status_tool() -> str:
+    """Show whether KIS, KRX and DART are configured; never returns secret values."""
+    return json.dumps(provider_status(), ensure_ascii=False)
+
+@mcp.tool()
+def mock_skc_snapshot() -> str:
+    """Return schema-only SKC demo data. This contains no real market prices."""
+    return json.dumps(MockMarketData().snapshot("011790"), ensure_ascii=False)
+
+@mcp.tool()
 def kis_quote(symbol: str) -> str:
     """Read a domestic KRX stock quote. Uses the configured KIS paper host by default."""
     return json.dumps(kis.quote(symbol), ensure_ascii=False)
